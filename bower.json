@@ -1,0 +1,5 @@
+{
+    "name":  "BladeJS",
+    "version": "0.0.1",
+    "main": "src/js/bladejs.min.js"
+}
