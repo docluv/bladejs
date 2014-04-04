@@ -96,6 +96,10 @@
 
             delete this.blades[blade.selector];
 
+            this.elem.removeChild(document.querySelector(blade.selector));
+
+            this.setDimensions();
+
         },
 
         doesBladeExist: function(blade){
