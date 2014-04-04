@@ -14,23 +14,6 @@ module.exports = function (grunt) {
                 browser: true
             }
         },
-        concat: {
-            dist: {
-                src: ['src/license.txt',
-                'src/js/dev/*.js'
-                ],
-                dest: 'src/js/bladejs.js',
-                separator: ';'
-            },
-            license: {
-                src: ['src/license.txt',
-                'src/js/dev/bladejs.min.js'
-                ],
-                dest: 'src/js/bladejs.min.js',
-                separator: ';'
-            }
-
-        },
         uglify: {
         //    options: {
         //        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -45,6 +28,6 @@ module.exports = function (grunt) {
     });
 
     // Default task.
-    grunt.registerTask('default', ['uglify', 'concat']);
+    grunt.registerTask('default', ['uglify']);
 
 };
