@@ -29,7 +29,33 @@
 
         version: "0.0.1",
 
-        //members go here
+        //members go here,
+
+        //these need to be the computed dimensions, padding, margin, width
+        width: 0,
+        height: 0,
+
+        selector: "", //example .blade-x
+
+        html: "",
+
+        mediaQueries: undefined,
+        /*
+
+        //start small and work up
+
+        {
+            breakpoint: "(max-width: 600px)",
+            callback: function(){
+                
+                //set dimensions
+                //make sure you set a reference to the
+                //blade's object so you can set the 
+                //height and width property
+            }
+        }
+
+        */
 
         settings: {
             //custom settings go here
