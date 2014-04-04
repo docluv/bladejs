@@ -15,7 +15,7 @@ blade1 = blade({
     source: "http://localhost:20049/src/js/test/blade1.html",
     callback: function () {
 
-        this.width = "320";
+        this.width = "340";
 
         b.addBlade(this, function () {
             
@@ -26,7 +26,7 @@ blade1 = blade({
                     "http://localhost:20049/src/js/test/blade2.html",
                     function () {
 
-                        this.width = "500";
+                        this.width = "540";
 
                         b.addBlade(this, function () {
 
@@ -37,7 +37,7 @@ blade1 = blade({
                     "http://localhost:20049/src/js/test/blade3.html",
                     function () {
 
-                        this.width = "600";
+                        this.width = "640";
 
                         b.addBlade(this, function () {
 

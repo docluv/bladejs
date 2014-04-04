@@ -1,3 +1,11 @@
+.main-content{
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
+
 .blade1{
     width: 300px;
     height: 100%;

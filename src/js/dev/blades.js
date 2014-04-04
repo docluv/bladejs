@@ -60,8 +60,8 @@
             }
 
             //use px for now, eventually a setting to define units?
-            document.querySelector(this.selector)
-                        .style.clientWidth = width + "px";
+            document.querySelector(".blades-anchor")
+                        .style.width = width + "px";
 
         },
 
@@ -88,7 +88,7 @@
 
             newBlade.innerHTML = blade.html;
 
-            document.querySelector(this.selector)
+            document.querySelector(".blades-anchor")
                     .appendChild(newBlade);
 
             this.setDimensions();
