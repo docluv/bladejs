@@ -16,11 +16,13 @@
 
         constructor: blades,
 
-        init: function (customSettings) {
+        init: function (settings) {
 
             var that = this;
 
-            that.settings = $().extend({}, that.settings, customSettings);
+         //   that.settings = $().extend({}, that.settings, customSettings);
+
+            that.selector = settings.selector;
 
             //custom setup functionality
 
@@ -34,6 +36,7 @@
         width: 0,
         height: 0,
 
+        selector: "",
         elem: undefined, //target element
         wrapperelem: undefined,
 
@@ -42,32 +45,33 @@
         setDimensions: function(){
             
             var width = 0,
-                blade;
+                blade, key;
 
             for(key in this.blades){
                 
                 blade = this.blades[key];
 
                 if(typeof blade.width === "function"){
-                    width += blade.width.call(blade);
+                    width += parseInt(blade.width.call(blade), 10);
                 }else{
-                    width += blade.width;
+                    width += parseInt(blade.width, 10);
                 }
 
             }
 
             //use px for now, eventually a setting to define units?
-            this.elem.style.clientWidth = width + "px";
+            document.querySelector(this.selector)
+                        .style.clientWidth = width + "px";
 
         },
 
-        addBlade: function(blade){
+        addBlade: function(blade, callback){
             
             //assume it is a blade object for now,
             //later test for a dynamic object
             if(typeof blade !== "object" ||
-                !isABlade(blade) ||
-                doesBladeExist(blade)){
+                !this.isABlade(blade) ||
+                this.doesBladeExist(blade)){
                 
                 //get out because we obviously can't use this.
                 return;
@@ -75,10 +79,23 @@
 
             this.blades[blade.selector] = blade;
 
-            this.elem.appendChild(document
-                        .createDocumentFragment(blade.html));
+            var newBlade = document.createElement("div");
+
+            newBlade.classList.add("blade");
+            newBlade.classList.add(blade.selector
+                    .replace(".", "")
+                    .replace("#", ""));
+
+            newBlade.innerHTML = blade.html;
+
+            document.querySelector(this.selector)
+                    .appendChild(newBlade);
 
             this.setDimensions();
+
+            if(callback){
+                callback.call(blade);
+            }
 
         },
 
@@ -96,7 +113,8 @@
 
             delete this.blades[blade.selector];
 
-            this.elem.removeChild(document.querySelector(blade.selector));
+            document.querySelector(this.selector)
+                .removeChild(document.querySelector(blade.selector));
 
             this.setDimensions();
 
