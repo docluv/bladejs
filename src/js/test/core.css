@@ -1,0 +1,36 @@
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 100%;
+}
+
+body {
+    -ms-content-zooming: none;
+    -ms-scroll-translation: vertical-to-horizontal;
+    -ms-touch-action: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    touch-action: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    overflow-x: hidden;
+    background-color: #333;
+    background-attachment: fixed;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #333;
+    letter-spacing: 0.02em;
+    font-size: 13px;
+    font-family: 'Segoe UI', 'Segoe WP', 'Open Sans', 'Lucida Grande', "sans-serif";
+    line-height: 1.231;
+}
+
+/*http://www.sitepoint.com/html5-main-element/  */
+main {
+    display: block;
+}

@@ -60,7 +60,7 @@
             }
 
             //use px for now, eventually a setting to define units?
-            document.querySelector(".blades-anchor")
+            document.querySelector(this.settings.bladesAnchor)
                         .style.width = width + "px";
 
         },
@@ -81,14 +81,14 @@
 
             var newBlade = document.createElement("div");
 
-            newBlade.classList.add("blade");
+            newBlade.classList.add(this.settings.bladeClass);
             newBlade.classList.add(blade.selector
                     .replace(".", "")
                     .replace("#", ""));
 
             newBlade.innerHTML = blade.html;
 
-            document.querySelector(".blades-anchor")
+            document.querySelector(this.settings.bladesAnchor)
                     .appendChild(newBlade);
 
             this.setDimensions();
@@ -145,6 +145,10 @@
 
         settings: {
             //custom settings go here
+            removeBlasde : ".remove-blade",
+            bladesAnchor : ".blades-anchor",
+            bladeClass: "blade",
+
         }
 
     };
