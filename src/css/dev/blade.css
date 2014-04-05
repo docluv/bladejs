@@ -25,6 +25,7 @@
 .blades-anchor {
     height: 100%;
     /*position:absolute;*/
+    transition: width 500ms ease-in-out;
 }
 
 .remove-blade

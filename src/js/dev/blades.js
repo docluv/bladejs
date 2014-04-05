@@ -26,6 +26,12 @@
 
             //custom setup functionality
 
+            document.querySelector(that.settings.removeBlasde)
+                    .addEventListener("click", function(){
+                        
+                        that.removeLastBlade();
+                    });
+
             return that;
         },
 
@@ -35,6 +41,7 @@
 
         width: 0,
         height: 0,
+        count: 0,
 
         selector: "",
         elem: undefined, //target element
@@ -65,6 +72,20 @@
 
         },
 
+        removeLastBlade: function(){
+            
+            var key, blade;
+
+            for(key in this.blades){
+                
+                blade = this.blades[key];
+
+            }
+
+            this.removeBlade(blade);
+
+        },
+
         addBlade: function(blade, callback){
             
             //assume it is a blade object for now,
@@ -78,6 +99,7 @@
             }
 
             this.blades[blade.selector] = blade;
+            this.count += 1;
 
             var newBlade = document.createElement("div");
 
@@ -100,6 +122,10 @@
         },
 
         removeBlade: function(blade){
+
+            if(this.count === 0){
+                return;
+            }
             
             if(typeof blade === "string"){
                 //get the object
@@ -112,8 +138,9 @@
             }
 
             delete this.blades[blade.selector];
+            this.count -= 1;
 
-            document.querySelector(this.selector)
+            document.querySelector(this.settings.bladesAnchor)
                 .removeChild(document.querySelector(blade.selector));
 
             this.setDimensions();
@@ -147,7 +174,7 @@
             //custom settings go here
             removeBlasde : ".remove-blade",
             bladesAnchor : ".blades-anchor",
-            bladeClass: "blade",
+            bladeClass: "blade"
 
         }
 
