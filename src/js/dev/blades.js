@@ -52,7 +52,7 @@
         setDimensions: function(){
             
             var width = 0,
-                blade, key;
+                blade, key, style;
 
             for(key in this.blades){
                 
@@ -61,7 +61,16 @@
                 if(typeof blade.width === "function"){
                     width += parseInt(blade.width.call(blade), 10);
                 }else{
-                    width += parseInt(blade.width, 10);
+
+                    style = window.getComputedStyle(
+                        document.querySelector(blade.selector)
+                    );
+
+                    width += parseInt(style.width, 10);
+                    width += parseInt(style.marginLeft, 10);
+                    width += parseInt(style.marginRight, 10);
+                    width += parseInt(style.paddingLeft, 10);
+                    width += parseInt(style.paddingRight, 10);
                 }
 
             }
