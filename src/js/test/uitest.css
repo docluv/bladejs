@@ -27,8 +27,8 @@
 .blade3{
     width: 600px;
     height: 100%;
-    background-color: #0ff;
-    color: #fff;
+    background-color: #fcfcfc;
+    color: #b5b5b5;
     margin: 10px;
     padding: 0 10px;
 }
@@ -37,7 +37,7 @@
     width: 700px;
     height: 100%;
     background-color: #ff0;
-    color: #fff;
+    color: #000;
     margin: 10px;
     padding: 0 10px;
 }

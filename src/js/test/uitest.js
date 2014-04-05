@@ -18,7 +18,7 @@ blade1 = blade({
         this.width = "340";
 
         b.addBlade(this, function () {
-            
+
             document.querySelector(".blade1")
             .addEventListener("click", function () {
 
@@ -30,7 +30,7 @@ blade1 = blade({
 
                         b.addBlade(this, function () {
 
-            document.querySelector(".blade2")
+                            document.querySelector(".blade2")
             .addEventListener("click", function () {
 
                 addBlade(".blade3",
@@ -41,7 +41,24 @@ blade1 = blade({
 
                         b.addBlade(this, function () {
 
+                            document.querySelector(".blade3")
+            .addEventListener("click", function () {
 
+                addBlade(".blade4",
+                    "http://localhost:20049/src/js/test/blade4.html",
+                    function () {
+
+                        this.width = "740";
+
+                        b.addBlade(this, function () {
+
+
+                        });
+
+                    }
+                );
+
+            });
                         });
 
                     }
