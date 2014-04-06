@@ -1,79 +1,101 @@
-function addBlade(selector, src, callback) {
+var b = blades({ "selector": ".blades-wrapper" });
 
-    var newBlade = blade({
-        selector: selector,
-        source: src,
-        callback: callback
-    });
+function getMarkup(url, callback) {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('get', url);
+    xhr.setRequestHeader("Content-Type", "text/html");
+    xhr.setRequestHeader("Accept", "text/html");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status == 200) {
+
+            if (callback) {
+                callback(xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+
 };
 
-var b = blades({ "selector": ".blades-wrapper" }),
+function addBlade(obj) {
 
-blade1 = blade({
+    var selector = obj.selector,
+        src = obj.source,
+        callback = obj.callback;
+
+    getMarkup(src, function (html) {
+
+        b.addBlade(blade({
+            selector: selector,
+            html: html
+        }), callback);
+
+    });
+
+};
+
+
+addBlade({
 
     selector: ".blade1",
     source: "http://localhost:20049/src/js/test/blade1.html",
     callback: function () {
 
-        this.width = "340";
-
-        b.addBlade(this, function () {
-
-            document.querySelector(".blade1")
+        document.querySelector(".blade1")
             .addEventListener("click", function () {
-
-                addBlade(".blade2",
-                    "http://localhost:20049/src/js/test/blade2.html",
-                    function () {
-
-                        this.width = "540";
-
-                        b.addBlade(this, function () {
-
-                            document.querySelector(".blade2")
-            .addEventListener("click", function () {
-
-                addBlade(".blade3",
-                    "http://localhost:20049/src/js/test/blade3.html",
-                    function () {
-
-                        this.width = "640";
-
-                        b.addBlade(this, function () {
-
-                            document.querySelector(".blade3")
-            .addEventListener("click", function () {
-
-                addBlade(".blade4",
-                    "http://localhost:20049/src/js/test/blade4.html",
-                    function () {
-
-                        this.width = "740";
-
-                        b.addBlade(this, function () {
-
-
-                        });
-
-                    }
-                );
-
+                addBlade2();
             });
-                        });
-
-                    }
-                );
-
-            });
-
-                        });
-
-                    }
-                );
-
-            });
-
-        });
 
     }
 });
+
+function addBlade2() {
+
+    addBlade({
+        selector: ".blade2",
+        source: "http://localhost:20049/src/js/test/blade2.html",
+        callback: function () {
+
+            document.querySelector(".blade2")
+                .addEventListener("click", function () {
+
+                    addBlade3();
+
+                });
+
+        }
+    });
+}
+
+function addBlade3() {
+
+    addBlade({
+        selector: ".blade3",
+        source: "http://localhost:20049/src/js/test/blade3.html",
+        callback: function () {
+
+            document.querySelector(".blade3")
+            .addEventListener("click", function () {
+
+                addBlade4();
+
+            });
+        }
+    });
+}
+
+function addBlade4() {
+
+    addBlade({
+        selector: ".blade4",
+        source: "http://localhost:20049/src/js/test/blade4.html",
+        callback: function () {
+
+        }
+    });
+
+}

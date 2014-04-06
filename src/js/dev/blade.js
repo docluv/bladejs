@@ -20,20 +20,13 @@
 
             var that = this;
 
-            that.settings = $().extend({}, that.settings, customSettings);
-
-            //custom setup functionality
-
-            that.selector = that.settings.selector;
-            that.source = that.settings.source;
-
-            if(typeof that.source === "string" &&
-                that.source !== ""){
-
-                    that.getMarkup(that.source,
-                                    that.settings.callback);
-                    
-                }
+            if(customSettings && "object" === typeof customSettings){
+                
+                that.selector = customSettings.selector || "";
+                that.html = customSettings.html || "";
+                that.onload = customSettings.onload;
+            
+            }
 
             return that;
         },
@@ -46,35 +39,13 @@
         width: 0,
         height: 0,
 
-        source: "",
         selector: "", //example .blade-x
 
         html: "",
 
-        getMarkup: function (url, callback) {
+        child: undefined,
 
-            var that = this,
-                xhr = new XMLHttpRequest();
-
-            xhr.open('get', url);
-            xhr.setRequestHeader("Content-Type", "text/html");
-            xhr.setRequestHeader("Accept", "text/html");
-
-            xhr.onreadystatechange = function (e) {
-                if (xhr.readyState === 4 && xhr.status == 200) {
-                    
-                    that.html = this.responseText;
-
-                    if(callback){
-                        callback.call(that);
-                    }
-                }
-            }
-
-            xhr.send();
-
-        },
-
+        onload: undefined,
 
         mediaQueries: undefined,
         /*
@@ -93,12 +64,6 @@
         }
 
         */
-
-        settings: {
-            //custom settings go here
-            source: "",
-            selector: ""
-        }
 
     };
 

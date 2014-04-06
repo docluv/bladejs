@@ -1,5 +1,5 @@
 
-module("BladeJS Blade Unit Tests", {
+module("bladesJS blades Unit Tests", {
     setup: function () {
 
     },
@@ -10,40 +10,45 @@ module("BladeJS Blade Unit Tests", {
 
 
 
-test("Verify We Have blade with expected members", function () {
+test("Verify We Have blades with expected members", function () {
 
     //basic sainty assertions to know members are present
-    ok(blade, "blade object should exist");
-    ok(blade.fn.init, "init function should exist");
-    ok(blade.fn.version, "version should exist");
-    equal(blade.fn.width, 0, "width should be 0");
-    equal(blade.fn.height, 0, "height should be 0");
-    equal(blade.fn.source, "", "source should be empty");
-    equal(blade.fn.selector, "", "selector should be empty");
-    equal(blade.fn.html, "", "html should exist");
-    isFunction(blade.fn.getMarkup, "getMarkup function should exist");
-    isObject(blade.fn.settings, "settings function should exist");
-    equal(blade.fn.settings.source, "", "settings.source should exist");
-    equal(blade.fn.settings.selector, "", "settings.selector should exist");
+    ok(blades, "blades object should exist");
+    ok(blades.fn.init, "init function should exist");
+    ok(blades.fn.version, "version should exist");
+    equal(blades.fn.width, 0, "width should be 0");
+    equal(blades.fn.height, 0, "height should be 0");
+    equal(blades.fn.count, 0, "count should be 0");
+    equal(blades.fn.elem, undefined, "source should be empty");
+    equal(blades.fn.selector, "", "selector should be empty");
+    equal(blades.fn.wrapperelem, undefined, "html should exist");
+    
+    isObject(blades.fn.blades, "blades function should exist");
+    isObject(blades.fn.mediaQueries, "mediaQueries function should exist");
+    isObject(blades.fn.settings, "settings function should exist");
+    
+    equal(blades.fn.settings.removeBlade, ".remove-blade", "settings.removeBlade should exist");
+    equal(blades.fn.settings.bladesAnchor, ".blades-anchor", "settings.bladesAnchor should exist");
+    equal(blades.fn.settings.bladeClass, "blade", "settings.bladeClass should exist");
 
+    isFunction(blades.fn.setDimensions, "setDimensions function should exist");
+    isFunction(blades.fn.removeLastBlade, "removeLastBlade function should exist");
+    isFunction(blades.fn.addBlade, "addBlade function should exist");
+    isFunction(blades.fn.removeBlade, "removeBlade function should exist");
+    isFunction(blades.fn.doesBladeExist, "doesBladeExist function should exist");
+    isFunction(blades.fn.isABlade, "isABlade function should exist");
 });
 
 
-test("Verify a new blade instance sets the source and selector and calls getMarkup", function () {
+test("Verify a new blades instance sets the source and selector and calls getMarkup", function () {
 
-    var selector = ".blade1",
-        source = "http://localhost:20049/src/js/test/blade1.html",
-        getMarkup = sinon.stub(blade.fn, "getMarkup"),
-        blade1 = blade({
+    var selector = ".blades1",
+        blades1 = blades({
 
-            selector: selector,
-            source: source
+            selector: selector
         });
 
-    equal(blade1.settings.source, source, "settings.source should exist");
-    equal(blade1.settings.selector, selector, "settings.selector should exist");
-    ok(getMarkup.called, "getMarkup should be called");
-    equal(getMarkup.callCount, 1, "getMarkup should be called once");
+    equal(blades1.selector, selector, "settings.selector should exist");
+
 
 });
-

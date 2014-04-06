@@ -20,13 +20,11 @@
 
             var that = this;
 
-         //   that.settings = $().extend({}, that.settings, customSettings);
-
             that.selector = settings.selector;
 
             //custom setup functionality
 
-            document.querySelector(that.settings.removeBlasde)
+            document.querySelector(that.settings.removeBlade)
                     .addEventListener("click", function(){
                         
                         that.removeLastBlade();
@@ -51,12 +49,15 @@
         
         setDimensions: function(){
             
-            var width = 0,
+            var that = this,
+                width = 0,
+                anchor = document.querySelector(that.settings.bladesAnchor),
+                anchorWidth = parseInt(anchor.style.width, 0),
                 blade, key, style;
 
-            for(key in this.blades){
+            for(key in that.blades){
                 
-                blade = this.blades[key];
+                blade = that.blades[key];
 
                 if(typeof blade.width === "function"){
                     width += parseInt(blade.width.call(blade), 10);
@@ -76,8 +77,16 @@
             }
 
             //use px for now, eventually a setting to define units?
-            document.querySelector(this.settings.bladesAnchor)
-                        .style.width = width + "px";
+            requestAnimationFrame(function(){
+                
+                anchor.style.width = width + "px";
+
+                setTimeout(function(){
+                    document.querySelector(that.settings.bladesWrapper)
+                            .scrollLeft = width;
+                }, 500);
+
+            });
 
         },
 
@@ -167,8 +176,7 @@
         //a safety check
         isABlade: function(blade){
             
-            if(!blade.selector || !blade.html
-                || !blade.width){
+            if(!blade.selector || !blade.html){
                 return false;
             }
 
@@ -181,8 +189,9 @@
 
         settings: {
             //custom settings go here
-            removeBlasde : ".remove-blade",
+            removeBlade : ".remove-blade",
             bladesAnchor : ".blades-anchor",
+            bladesWrapper : ".blades-wrapper",
             bladeClass: "blade"
 
         }
