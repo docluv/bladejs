@@ -155,6 +155,11 @@
                 return;
             }
 
+            if(blade.child){
+                //should initiate a chain reaction to remove blades in the breadcrumb
+                this.removeBlade(blade.child);
+            }
+
             delete this.blades[blade.selector];
             this.count -= 1;
 
@@ -185,6 +190,9 @@
 
         //an object to hold media queries that 
         //should execute responsive callbacks
+        // "bp600": function(){
+                        
+        //          }
         mediaQueries:{},
 
         settings: {

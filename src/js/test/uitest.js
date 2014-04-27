@@ -45,7 +45,7 @@ addBlade({
     source: "http://localhost:20049/src/js/test/blade1.html",
     callback: function () {
 
-        document.querySelector(".blade1")
+        document.querySelector(".blade1 p")
             .addEventListener("click", function () {
                 addBlade2();
             });

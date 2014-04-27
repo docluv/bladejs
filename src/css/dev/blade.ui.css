@@ -1,0 +1,11 @@
+.blade-header{
+    
+}
+
+.blade-header .blade-notification{
+    height: .8em;
+    color: #fff;
+    background-color: #4cff00;
+    line-height: .8em;
+    text-align: center;
+}
